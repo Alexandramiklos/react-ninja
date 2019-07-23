@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- //babel transpiles our code ito smth that browser understands -->
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script  type="text/babel">
+        class App extends React.Component{
+        // react - object, because I added the first script
+        //components - to inherit all the basic functionality of a component into this class App
+        // App is our compenent; class based comenents must have inside at least one fuction
+    state = {
+        name:"Ally",
+        age: 26
+    }
+    handleClick = (e )=> {
+       // console.log(e.target)
+    console.log(this.state); //- it doesn't work, just with an arrow function
+    // this.setState({
+    //     name:"Yoshi"
+    // });
+    console.log(this.state);
+}
+    handleMouseOver(e){
+        console.log(e.target, e.pageX)
+    }
+    handleCopy(e){
+        console.log("Be yourself!")
+    }
+    handleChange = (e)  =>{
+            this.setState({
+                name: e.target.value
+            });
+        }
+        handleSubmit = (e) => {
+            e.preventDefault();
+            console.log("form submitted", this.state.name)
+        }
+    render(){
+        //the render method, is responsible for rendering my template to whatever element we want to render to
+        
+        return (
+            <div className="app-content">
+                <h1>Hey, {this.state.name}!</h1>
+                <form onSubmit={this.handleSubmit}>
+                    <input type="text" onChange={this.handleChange}/>
+                    
+                    <button>Submit</button>
+                </form>
+                <p>My name is  {this.state.name} and I am {this.state.age}.</p>
+                <button onClick={this.handleClick}>Click me</button>
+                <button onMouseOver={this.handleMouseOver}>Hover</button>
+                <p onCopy={this.handleCopy}>Trust yourself!</p>
+            </div>
+        )
+        //onSubmit - capturing the enter to submit and also the button
+        //this references the component itself -App
+        // return a value, our jsx template
+        //jsx - write html code inside js
+    }   //html - always return one root elememt at the top, we can nest as many elements inside that root elem
+        //for class always use className
+    }
+    ReactDOM.render(<App />, document.getElementById("app"));
+    //the second script is the glue layer that takes our component and can render them to the DOM
+    //the first parameter- which compenent we want to render to the DOM (we take the component name(class) and put it inside a tag )
+    //the second parameter- ehare to render it-in my case to the div with id "app"
+    </script>
+</body>
+</html>
